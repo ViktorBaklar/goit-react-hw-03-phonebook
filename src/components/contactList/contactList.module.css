@@ -1,0 +1,9 @@
+.contactList {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.contactList li:not(:last-child) {
+  margin-bottom: 15px;
+}
