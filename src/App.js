@@ -19,20 +19,20 @@ class App extends Component {
     filter: '',
   };
 
-  // componentDidMount() {
-  //   const contacts = localStorage.getItem('contacts');
-  //   const parsedContacts = JSON.parse(contacts);
-  //   console.log(parsedContacts)
-  //   if (parsedContacts) this.setState({ contacts: parsedContacts });
-  // }
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+    console.log(parsedContacts)
+    if (parsedContacts) this.setState({ contacts: parsedContacts });
+  }
 
-  // componentDidUpdate(prevState) {
-  //   const { contacts: nowContacts } = this.state;
-  //   const { contacts: prevContacts } = prevState;
-  //   if (nowContacts !== prevContacts) {
-  //     localStorage.setItem('contacts', JSON.stringify(nowContacts));
-  //   }
-  // }
+  componentDidUpdate(prevState) {
+    const { contacts: nowContacts } = this.state;
+    const { contacts: prevContacts } = prevState;
+    if (nowContacts !== prevContacts) {
+      localStorage.setItem('contacts', JSON.stringify(nowContacts));
+    }
+  }
 
   addContact = ({ name, number }) => {
     const contact = {
@@ -41,7 +41,9 @@ class App extends Component {
       number,
     }
 
-    if (contact.name === name) {
+    const { contacts } = this.state
+
+    if (contacts.some(contact => contact.name === name)) {
       alert(`${name} is already in contacts.`);
       return;
     }
